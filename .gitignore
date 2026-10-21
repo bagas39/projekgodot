@@ -1,0 +1,28 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+/ios/
+
+# Export & build outputs
+/build/
+/export/
+
+# Mono / C# specific (if applicable)
+.mono/
+data_*/
+mono_crash.*.json
+
+# System & OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor & IDE files
+.vscode/
+.idea/
+
+# AI Agent, MCP & Internal docs
+.agents/
+addons/godot_mcp/
+PROJECT.md
+*.log

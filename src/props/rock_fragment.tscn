@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://rockfrag123"]
+
+[ext_resource type="Script" path="res://src/props/rock_fragment.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rock"]
+albedo_color = Color(0.25, 0.22, 0.22, 1)
+roughness = 0.85
+emission_enabled = true
+emission = Color(0.6, 0.25, 0.05, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_rock"]
+material = SubResource("StandardMaterial3D_rock")
+size = Vector3(0.8, 0.6, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rock"]
+size = Vector3(0.8, 0.6, 0.8)
+
+[node name="RockFragment" type="StaticBody3D"]
+collision_layer = 6
+collision_mask = 7
+script = ExtResource("1_script")
+
+[node name="VisualMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("BoxShape3D_rock")

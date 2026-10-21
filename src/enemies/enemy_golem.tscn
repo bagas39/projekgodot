@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=3 uid="uid://enemygolem999"]
+
+[ext_resource type="Script" path="res://src/enemies/enemy_base.gd" id="1_script"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_golem"]
+radius = 0.75
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stone"]
+albedo_color = Color(0.24, 0.26, 0.3, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_core"]
+albedo_color = Color(1, 0.35, 0.05, 1)
+emission_enabled = true
+emission = Color(1, 0.35, 0.05, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_torso"]
+material = SubResource("StandardMaterial3D_stone")
+size = Vector3(1.2, 1.1, 0.9)
+
+[sub_resource type="BoxMesh" id="BoxMesh_core"]
+material = SubResource("StandardMaterial3D_core")
+size = Vector3(0.5, 0.4, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_head"]
+material = SubResource("StandardMaterial3D_stone")
+size = Vector3(0.65, 0.5, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eye"]
+material = SubResource("StandardMaterial3D_core")
+size = Vector3(0.12, 0.08, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_arm"]
+material = SubResource("StandardMaterial3D_stone")
+size = Vector3(0.42, 1.0, 0.48)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fist"]
+material = SubResource("StandardMaterial3D_stone")
+size = Vector3(0.48, 0.48, 0.52)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_leg"]
+material = SubResource("StandardMaterial3D_stone")
+top_radius = 0.26
+bottom_radius = 0.28
+height = 0.6
+
+[node name="EnemyGolem" type="CharacterBody3D" groups=["enemies"]]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_script")
+max_health = 160
+move_speed = 2.2
+attack_damage = 25
+attack_rate = 1.1
+exp_value = 25
+knockback_resistance = 0.65
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 0)
+shape = SubResource("CapsuleShape3D_golem")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+
+[node name="Torso" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+mesh = SubResource("BoxMesh_torso")
+
+[node name="CoreChest" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.42)
+mesh = SubResource("BoxMesh_core")
+
+[node name="Head" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, -0.05)
+mesh = SubResource("BoxMesh_head")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16, 1.92, -0.34)
+mesh = SubResource("BoxMesh_eye")
+
+[node name="EyeRight" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16, 1.92, -0.34)
+mesh = SubResource("BoxMesh_eye")
+
+[node name="ArmLeft" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 1.0, 0)
+mesh = SubResource("BoxMesh_arm")
+
+[node name="ArmRight" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 1.0, 0)
+mesh = SubResource("BoxMesh_arm")
+
+[node name="FistLeft" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 0.38, -0.08)
+mesh = SubResource("BoxMesh_fist")
+
+[node name="FistRight" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 0.38, -0.08)
+mesh = SubResource("BoxMesh_fist")
+
+[node name="LegLeft" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.3, 0)
+mesh = SubResource("CylinderMesh_leg")
+
+[node name="LegRight" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.3, 0)
+mesh = SubResource("CylinderMesh_leg")

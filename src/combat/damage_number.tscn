@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmgnumber12345"]
+
+[ext_resource type="Script" path="res://src/combat/damage_number.gd" id="1_script"]
+
+[node name="DamageNumber" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Label3D" type="Label3D" parent="."]
+billboard = 1
+double_sided = false
+no_depth_test = true
+modulate = Color(1, 0.2, 0.2, 1)
+outline_modulate = Color(0, 0, 0, 1)
+text = "10"
+font_size = 48
+outline_size = 12

@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://enemymage555"]
+
+[ext_resource type="Script" path="res://src/enemies/enemy_mage.gd" id="1_script"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mage"]
+radius = 0.45
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_robe"]
+albedo_color = Color(0.2, 0.1, 0.32, 1)
+roughness = 0.75
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_robe"]
+material = SubResource("StandardMaterial3D_robe")
+top_radius = 0.28
+bottom_radius = 0.48
+height = 1.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_hood"]
+material = SubResource("StandardMaterial3D_robe")
+radius = 0.35
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glow"]
+albedo_color = Color(0.95, 0.25, 1, 1)
+emission_enabled = true
+emission = Color(0.95, 0.25, 1, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_eye"]
+material = SubResource("StandardMaterial3D_glow")
+size = Vector3(0.08, 0.06, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wood"]
+albedo_color = Color(0.18, 0.15, 0.14, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_shaft"]
+material = SubResource("StandardMaterial3D_wood")
+top_radius = 0.035
+bottom_radius = 0.035
+height = 1.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_crystal"]
+material = SubResource("StandardMaterial3D_glow")
+size = Vector3(0.22, 0.22, 0.22)
+
+[node name="EnemyMage" type="CharacterBody3D" groups=["enemies"]]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_script")
+max_health = 65
+move_speed = 3.2
+attack_damage = 18
+exp_value = 20
+knockback_resistance = 0.2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_mage")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+
+[node name="RobeMesh" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+mesh = SubResource("CylinderMesh_robe")
+
+[node name="HoodMesh" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.05)
+mesh = SubResource("SphereMesh_hood")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11, 1.42, -0.32)
+mesh = SubResource("BoxMesh_eye")
+
+[node name="EyeRight" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, 1.42, -0.32)
+mesh = SubResource("BoxMesh_eye")
+
+[node name="Staff" type="Node3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52, 0, -0.2)
+
+[node name="StaffShaft" type="MeshInstance3D" parent="VisualRoot/Staff"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CylinderMesh_shaft")
+
+[node name="StaffCrystal" type="MeshInstance3D" parent="VisualRoot/Staff"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.5, 0.5, -0.707107, 0.5, 0.5, 0.707107, 0, 1.85, 0)
+mesh = SubResource("BoxMesh_crystal")
+
+[node name="StaffLight" type="OmniLight3D" parent="VisualRoot/Staff"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85, 0)
+light_color = Color(0.9, 0.3, 1, 1)
+light_energy = 1.2
+omni_range = 2.5

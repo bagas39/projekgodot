@@ -1,0 +1,244 @@
+[gd_scene format=3 uid="uid://mainmenu100"]
+
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://src/ui/sanctuary_armory.tscn" id="2_armory"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gem_badge"]
+bg_color = Color(0.12, 0.08, 0.2, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65, 0.35, 0.95, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stats_panel"]
+bg_color = Color(0.06, 0.08, 0.12, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.72, 0.25, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04, 0.05, 0.08, 1)
+
+[node name="HeaderContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 28
+
+[node name="GemDisplay" type="PanelContainer" parent="HeaderContainer"]
+custom_minimum_size = Vector2(140, 38)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_gem_badge")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeaderContainer/GemDisplay"]
+layout_mode = 2
+alignment = 1
+
+[node name="GemIcon" type="Label" parent="HeaderContainer/GemDisplay/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "💎"
+
+[node name="GemCountLabel" type="Label" parent="HeaderContainer/GemDisplay/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.5, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="CenterBox" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 360)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -180.0
+offset_right = 200.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="TitleBox" type="VBoxContainer" parent="CenterBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TitleLabel" type="Label" parent="CenterBox/TitleBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 42
+text = "DUNGEON SURVIVOR 3D"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="CenterBox/TitleBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.75, 0.88, 1)
+theme_override_font_sizes/font_size = 15
+text = "ISOMETRIC ACTION ROGUELITE"
+horizontal_alignment = 1
+
+[node name="ButtonsBox" type="VBoxContainer" parent="CenterBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="StartButton" type="Button" parent="CenterBox/ButtonsBox"]
+custom_minimum_size = Vector2(260, 46)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 18
+text = "Start Run"
+
+[node name="ArmoryButton" type="Button" parent="CenterBox/ButtonsBox"]
+custom_minimum_size = Vector2(260, 46)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 18
+text = "Sanctuary / Armory"
+
+[node name="StatsButton" type="Button" parent="CenterBox/ButtonsBox"]
+custom_minimum_size = Vector2(260, 46)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 18
+text = "Lifetime Stats"
+
+[node name="QuitButton" type="Button" parent="CenterBox/ButtonsBox"]
+custom_minimum_size = Vector2(260, 46)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 18
+text = "Quit Game"
+
+[node name="FooterLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -380.0
+offset_top = -36.0
+offset_right = 380.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.5, 0.55, 0.65, 0.75)
+theme_override_font_sizes/font_size = 13
+text = "[WASD] Move  |  [LMB / Space] Slash  |  [RMB / Shift] Dash  |  [Q / E] Shockwave"
+horizontal_alignment = 1
+
+[node name="StatsModal" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(420, 330)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -165.0
+offset_right = 210.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_stats_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="StatsModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsModal/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="StatsTitle" type="Label" parent="StatsModal/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 22
+text = "LIFETIME STATISTICS"
+horizontal_alignment = 1
+
+[node name="StatHighWave" type="Label" parent="StatsModal/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 15
+text = "Highest Wave Cleared: 0"
+horizontal_alignment = 1
+
+[node name="StatKills" type="Label" parent="StatsModal/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 15
+text = "Total Enemies Slain: 0"
+horizontal_alignment = 1
+
+[node name="StatGems" type="Label" parent="StatsModal/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.5, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "Total Soul Gems: 0"
+horizontal_alignment = 1
+
+[node name="StatRuns" type="Label" parent="StatsModal/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 15
+text = "Runs Attempted: 0"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="StatsModal/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="CloseStatsButton" type="Button" parent="StatsModal/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(140, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 15
+text = "Back"
+
+[node name="SanctuaryArmory" parent="." instance=ExtResource("2_armory")]

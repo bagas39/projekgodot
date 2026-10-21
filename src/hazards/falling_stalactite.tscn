@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://stalactite123"]
+
+[ext_resource type="Script" path="res://src/hazards/falling_stalactite.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_circle"]
+transparency = 1
+albedo_color = Color(1, 0.45, 0.1, 0.7)
+emission_enabled = true
+emission = Color(1, 0.35, 0.05, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_circle"]
+material = SubResource("StandardMaterial3D_circle")
+top_radius = 2.5
+bottom_radius = 2.5
+height = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shadow"]
+transparency = 1
+albedo_color = Color(0.05, 0.02, 0.02, 0.65)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_shadow"]
+material = SubResource("StandardMaterial3D_shadow")
+top_radius = 2.4
+bottom_radius = 2.4
+height = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stalactite"]
+albedo_color = Color(0.25, 0.22, 0.24, 1)
+roughness = 0.85
+emission_enabled = true
+emission = Color(0.8, 0.25, 0.05, 1)
+emission_energy_multiplier = 1.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_stalactite"]
+material = SubResource("StandardMaterial3D_stalactite")
+top_radius = 0.6
+bottom_radius = 0.08
+height = 3.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_impact"]
+height = 2.0
+radius = 2.5
+
+[node name="FallingStalactite" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="TelegraphIndicator" type="Node3D" parent="."]
+
+[node name="WarningCircleMesh" type="MeshInstance3D" parent="TelegraphIndicator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+mesh = SubResource("CylinderMesh_circle")
+
+[node name="WarningShadowMesh" type="MeshInstance3D" parent="TelegraphIndicator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("CylinderMesh_shadow")
+
+[node name="WarningLight" type="OmniLight3D" parent="TelegraphIndicator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+light_color = Color(1, 0.5, 0.1, 1)
+light_energy = 2.0
+omni_range = 5.0
+
+[node name="StalactiteMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+mesh = SubResource("CylinderMesh_stalactite")
+
+[node name="ImpactArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 7
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ImpactArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_impact")
